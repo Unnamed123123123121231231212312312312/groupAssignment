@@ -248,7 +248,7 @@ def add():
 		cur.execute("INSERT INTO menu (dishName,price) VALUES (%s,%s)",(dishName,price))
 		mysql.connection.commit()
 		cur.close()
-		flash("added into the database")
+		flash("added into the database","success")
 	return render_template("add.html")
 
 
@@ -264,7 +264,7 @@ def delete():
 		cur.execute("DELETE FROM menu WHERE dishID =%s",(dishID))
 		mysql.connection.commit()
 		cur.close()
-		flash("deleted from the database")
+		flash("deleted from the database"，"success")
 	return render_template("delete.html")
 	
 
