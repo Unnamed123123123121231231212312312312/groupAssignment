@@ -1,0 +1,26 @@
+{% extends 'layout.html'%}
+
+{% block body %}
+
+<h1 style="color: white; ">Order!</h1>
+<p style="color: white; ">You can CHOOSE what you want to have !!!!!! what a surrrrrprise~~</p>
+{% from "includes/_formhelpers.html" import render_field %}
+<form action=" 	" method="POST">
+	<div class="form-group">
+		{{render_field(form.dishName, class_="form-control")}}
+	</div>
+	<div class="form-group">
+		{{ render_field(form.process_methods, class_="form-control")}}
+	</div>
+	<div class="form-group">
+		{{ render_field(form.number, class_="form-control")}}
+	</div>
+
+
+	<p><input type="submit" class="btn btn-primary" value="order on us NOW!"> </p>
+</form>
+	<footer>
+		<p id="copyright">&copy; Copyright @2020</p>
+	</footer>
+
+{% endblock %}
