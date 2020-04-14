@@ -158,15 +158,17 @@ def edit_userName():
 
 
 		users=session['userName']
+		session.pop('userName',None)
+		session['userName']=userName
 		cur= mysql.connection.cursor()
 
 		cur = mysql.connection.cursor()
 
 		cur.execute("UPDATE users SET userName=%s WHERE userName=%s",(userName,users))
+		cur.execute('UPDATE orders SET userName=%s WHERE userName=%s',(userName,users))
 
 		mysql.connection.commit()
-		session.pop('userName',None)
-		session['userName']=userName
+
 		
 		flash('Updated personal info','success')
 		return redirect(url_for('homepage'))
