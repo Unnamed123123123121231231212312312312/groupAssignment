@@ -1,0 +1,17 @@
+{% extends 'layout.html'%}
+
+{% block body %}
+
+<h1 style="color: white; ">Edit userName!</h1>
+{% from "includes/_formhelpers.html" import render_field %}
+<form action=" 	" method="POST">
+	<div class="form-group">
+		{{render_field(form.userName, class_="form-control")}}
+	</div>
+
+	<p><input type="submit" class="btn btn-primary" value="EDIT it NOW!"> </p>
+</form>
+	<footer>
+		<p id="copyright">&copy; Copyright @2020</p>
+	</footer>
+{% endblock %}
