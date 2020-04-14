@@ -264,7 +264,7 @@ def delete():
 		cur.execute("DELETE FROM menu WHERE dishID =%s",(dishID))
 		mysql.connection.commit()
 		cur.close()
-		flash("deleted from the database"，"success")
+		flash("deleted from the database","success")
 	return render_template("delete.html")
 	
 
@@ -346,7 +346,7 @@ def register():
 
 		cur.close()
 
-		flash('You can now login in login page','success')
+		flash('You can now login in login page' , 'success')
 		
 		return redirect(url_for('login'))
 	
