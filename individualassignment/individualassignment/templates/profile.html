@@ -1,0 +1,35 @@
+{% extends 'layout.html'%}
+
+{% block body %}
+<h1 style="color:white;">{{ session["userName"]}} profile</h1>
+
+<table class="table table-striped" style="color: white;">
+	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>email</th>
+		<th>address</th>
+		<th>password</th>
+		<th>register_date</th>
+	</tr>
+	{% for user in users%}
+		<tr>
+			<td>{{user.userID}}</td>
+			<td>{{user.userName}}</td>
+			<td>{{user.email}}</td>
+			<td>{{user.address}}</td>
+			<td>{{user.password}}</td>
+			<td>{{user.register_date}}</td>
+		</tr>
+	{% endfor %}
+</table>
+<p><a href="/profile/userName">edit user name</a></p>
+<p><a href="/profile/email">edit email </a></p>
+<p><a href="/profile/password">edit password</a></p>
+<p><a href="/profile/address">edit address</a></p>
+
+	<footer>
+		<p id="copyright">&copy; Copyright @2020</p>
+	</footer>
+
+{% endblock%}

@@ -1,0 +1,27 @@
+{% extends 'layout.html'%}
+{% block body %}
+     <h1 class="menu">Menu!!!!</h1>     
+	<h3 class="menu">Please enjoy </h2>
+
+	{% for a in u %}
+		<div class="card col-md-8 col-sm-12">
+			<div class="card-body">
+				<h1>Dish Name:{{ a.dishName }}</h1>
+				<h4>Dish ID:{{ a.dishID}}</h4>
+				<p >Price: {{ a.price }}$</p>
+			</div>
+		</div>
+	{% endfor %}
+
+	{% if session['userName'] is defined %}
+	<a class="btn btn-primary" href="/menu/order"> order Now!</a>
+
+	{% elif session['staffName'] is defined %}
+	<a href="/menu/add">add</a>
+	<a href="/menu/delete">delete</a>
+	{% endif %}
+	<footer>
+		<p id="copyright">&copy; Copyright @2020</p>
+	</footer>
+
+{% endblock %}
