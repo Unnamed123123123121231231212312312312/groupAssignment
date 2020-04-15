@@ -1,5 +1,5 @@
 from flask import Flask, render_template, flash,  request, session, redirect, url_for, logging
-from forms import RegisterForm ,orderForm, userNameForm,emailForm,passwordForm,addressForm
+from forms import RegisterForm ,orderForm, userNameForm,emailForm,passwordForm,addressForm,addForm,deleteForm
 from flask_mysqldb import MySQL
 from functools import wraps
 
@@ -240,24 +240,26 @@ def edit_address():
 @app.route('/menu/add',methods=["POST","GET"])
 @is_stafflogged_in
 def add():
-	if request.method=="POST":
-		dishName=request.form['dishName']
-		price=request.form['price']
+	form=addForm()
+	if request.method=="POST" and form.validate():
+		dishName=form.dishName.data
+		price=form.price.data
 		
 		cur = mysql.connection.cursor()
 		cur.execute("INSERT INTO menu (dishName,price) VALUES (%s,%s)",(dishName,price))
 		mysql.connection.commit()
 		cur.close()
 		flash("added into the database","success")
-	return render_template("add.html")
+	return render_template("add.html",form=form)
 
 
 
 @app.route('/menu/delete',methods=["POST","GET"])
 @is_stafflogged_in
 def delete():
-	if request.method=="POST":
-		dishID=request.form['dishID']
+	form=deleteForm()
+	if request.method=="POST" and form.validate():
+		dishID=form.dishID.data
 
 		cur = mysql.connection.cursor()
 
@@ -265,7 +267,7 @@ def delete():
 		mysql.connection.commit()
 		cur.close()
 		flash("deleted from the database","success")
-	return render_template("delete.html")
+	return render_template("delete.html",form=form)
 	
 
 @app.route("/login",methods=["POST","GET"])
@@ -346,7 +348,7 @@ def register():
 
 		cur.close()
 
-		flash('You can now login in login page' , 'success')
+		flash('You can now login in login page','success')
 		
 		return redirect(url_for('login'))
 	
