@@ -13,8 +13,6 @@ class addForm(Form):
 	dishName=StringField('dishName',[validators.DataRequired(),validators.length(min=1,max=100)])
 	price=IntegerField('price',[validators.DataRequired()])
 
-class deleteForm(Form):
-	dishID=IntegerField("dishID",[validators.DataRequired()])
 
 class orderForm(Form):
 	dishName=StringField('dishName',[validators.DataRequired()])

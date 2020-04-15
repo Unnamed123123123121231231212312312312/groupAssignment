@@ -1,5 +1,5 @@
 from flask import Flask, render_template, flash,  request, session, redirect, url_for, logging
-from forms import RegisterForm ,orderForm, userNameForm,emailForm,passwordForm,addressForm,addForm,deleteForm
+from forms import RegisterForm ,orderForm, userNameForm,emailForm,passwordForm,addressForm,addForm
 from flask_mysqldb import MySQL
 from functools import wraps
 
@@ -240,7 +240,7 @@ def edit_address():
 @app.route('/menu/add',methods=["POST","GET"])
 @is_stafflogged_in
 def add():
-	form=addForm()
+	form=addForm(request.form)
 	if request.method=="POST" and form.validate():
 		dishName=form.dishName.data
 		price=form.price.data
@@ -250,6 +250,7 @@ def add():
 		mysql.connection.commit()
 		cur.close()
 		flash("added into the database","success")
+		return redirect(url_for('menu'))
 	return render_template("add.html",form=form)
 
 
@@ -257,9 +258,8 @@ def add():
 @app.route('/menu/delete',methods=["POST","GET"])
 @is_stafflogged_in
 def delete():
-	form=deleteForm()
-	if request.method=="POST" and form.validate():
-		dishID=form.dishID.data
+	if request.method=="POST":
+		dishID=request.form['dishID']
 
 		cur = mysql.connection.cursor()
 
@@ -267,7 +267,7 @@ def delete():
 		mysql.connection.commit()
 		cur.close()
 		flash("deleted from the database","success")
-	return render_template("delete.html",form=form)
+	return render_template("delete.html")
 	
 
 @app.route("/login",methods=["POST","GET"])
